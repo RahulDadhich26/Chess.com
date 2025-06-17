@@ -44,6 +44,10 @@ export class GameManager {
                 const game = this.games.find(game => game.player1 === socket || game.player2 === socket);
                 if (game) {
                     console.log("inside makemove")
+                    if (!message.payload || !message.payload.move) {
+                        console.error("Invalid move message format");
+                        return;
+                    }
                     game.makeMove(socket, message.payload.move);
                 }
             }
